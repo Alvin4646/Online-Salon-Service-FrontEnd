@@ -1,0 +1,128 @@
+
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card">
+            <div class="card-body p-4">
+  
+              <div class="row">
+  
+                <div class="col-lg-7">
+                  
+  
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                      <p class="mb-1">Shopping cart</p>
+                    
+                    </div>
+                   
+                  </div>
+                  <div *ngIf="customer.cart?.serviceList!.length==0">
+                    <p class="alert alert-info">Your cart is empty.</p>
+                </div>
+                  <div class="card mb-3" *ngIf="customer.cart?.serviceList!.length>0">
+                    <div class="card-body" *ngFor="let service of customer.cart?.serviceList">
+                      <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                          
+                          <div class="ms-3">
+                            <h5>{{service.seviceName}}</h5>
+                            <p class="small mb-0">{{service.serviceDuration}} Hr</p>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center">
+                          
+                          <div style="width: 80px;">
+                            <h5 class="mb-0">Rs. {{service.servicePrice}}</h5>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+  
+  
+                 
+  
+              
+  
+                </div>
+                <div class="col-lg-5">
+                    <div class="card px-1 py-4">
+                        <div class="card-body">
+                            <h6 class="card-title mb-3">Create Appointment</h6>
+                           
+                            <h6 class="information mt-4">Please provide following information </h6>
+                          
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="locationSelect">Select Location</label>
+                                        <select class="form-control" id="locationSelect" [(ngModel)]="appointment.location">
+                                          <option>Mumbai</option>
+                                          <option>Pune</option>
+                                          <option>Delhi</option>
+                                          <option>Bangalore</option>
+                                        </select>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="datePicker">Select Preferred Date</label>
+                                        <input type="date" class="form-control" id="datePicker"[(ngModel)]="appointment.preferredDate">
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="timeSelect">Select Preferred Time</label>
+                                        <select class="form-control" id="timeSelect" [(ngModel)]="appointment.preferredTime" #timeRef="ngModel" required>
+                                          
+                                          <option >9:00</option>
+                                          <option >10:00</option>
+                                          <option >11:00</option>
+                                          <option >12:00</option>
+                                          <option >13:00</option>
+                                          <option >14:00</option>
+                                          <option >15:00</option>
+                                          <option >16:00</option>
+                                          <option >17:00</option>
+                                          <option >18:00</option>
+                                          <option >19:00</option>
+                                        </select>
+                                      </div>
+                                      <div *ngIf="timeRef.errors?.['required']" class="alert alert-danger">Please select a time</div>
+                                </div>
+                            </div>
+                            
+                            <div class=" d-flex flex-column text-center px-5 mt-3 mb-3"> <small class="agree-text">By Booking this appointment you agree to the</small> Terms & Conditions</div> 
+                            <button class="btn btn-primary btn-block confirm-button" [disabled]="customer.cart?.serviceList!.length==0||appointment.location==null||appointment.preferredTime==null" (click)="updateAppointment()">Update</button>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="updateMsg">
+                      <p class="alert alert-success">{{updateMsg}}</p>
+
+                  </div>
+
+                  <div *ngIf="errMsg">
+                      <p class="alert alert-danger">{{errMsg}}</p>
+
+                  </div>
+                  
+  
+                </div>
+  
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

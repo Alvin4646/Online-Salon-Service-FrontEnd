@@ -1,0 +1,45 @@
+
+.bg-cover {
+    background-attachment: static;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.jumbotron {
+    background-image: url('https://images.unsplash.com/photo-1608916403143-c9de75ac9e9a?ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OTl8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80');
+    background-size: cover;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  /* Style the greyed-out div */
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Style the text in the greyed-out div */
+  .overlay h1,
+  .overlay p {
+    margin: 0;
+    color: white;
+  }
+
+  .overlay h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .overlay p {
+    font-size: 2rem;
+  }

@@ -1,0 +1,70 @@
+
+<div class = "page-header mx-md-n5 text-center"style="width: 100%; height:100px; margin-top:20px">
+    <div class="container px-3 my-5 clearfix">
+    <h1 class="card-header">
+       My Appointments
+     
+    </h1>
+</div>
+ </div>
+<div class="container bootstrap snippets bootdey">
+    <div *ngIf="appointment.length == 0">
+        <p class="alert alert-info">You don't have any appointments to display.</p>
+    </div>
+    <div class="table-responsive" *ngIf="appointment.length>0">
+    	
+    	<table class="table colored-header datatable project-list align-middle mb-0 bg-white">
+    		<thead class="bg-light">
+        <tr>
+          
+            <th>Location</th>
+            <th>preferredDate</th>
+            <th>preferredTime</th>
+            <th>appointmentStatus</th>
+            <th>Services</th>
+            <th>Action</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        <tr *ngFor="let app of appointment">
+           
+            <td>{{app.location}}</td>
+            <td>{{app.preferredDate}}</td>
+            <td>{{app.preferredTime}}</td>
+            <td >
+                <span *ngIf="app.appointmentStatus=='BOOKED'" class="badge badge-success rounded-pill d-inline">{{app.appointmentStatus}}</span>
+                <span *ngIf="app.appointmentStatus=='OPEN'" class="badge badge-primary rounded-pill d-inline">{{app.appointmentStatus}}</span>
+                <span *ngIf="app.appointmentStatus=='CANCELED'" class="badge badge-danger rounded-pill d-inline">{{app.appointmentStatus}}</span>
+                
+            </td>
+            <td><ul>
+                <li class="list-group-item" *ngFor="let service of app.serviceList">
+                {{service.seviceName}} 
+            </li>
+            </ul></td>
+            <td>
+                <button type="button" class="btn btn-danger m-1" *ngIf="app.appointmentStatus!='OPEN'&&app.appointmentStatus!='CANCELED'"  (click)=" cancelAppointmentByid(app.appointmentId)" [disabled]="isCancelDisabled(app.preferredDate)"[title]="isCancelDisabled(app.preferredDate)?'Cancel time window over, cannot cancel now':''">Cancel</button>
+                <button type="button" class="btn btn-danger m-1" *ngIf="app.appointmentStatus=='OPEN'"  (click)=" deleteAppointment(app.appointmentId)">Delete</button>
+                <button type="button" class="btn btn-outline-primary m-1" *ngIf="app.appointmentStatus=='OPEN'" (click)="onUpdateClick(app.appointmentId)" >Update Appointment</button>
+                <button type="button" class="btn btn-outline-success m-1" *ngIf="app.appointmentStatus=='OPEN'" (click)="onBookClick(app.appointmentId)" >Book Appointment</button>
+                <button type="button" class="btn btn-outline-success m-1" *ngIf="app.appointmentStatus=='BOOKED'" (click)="showPayment(app.payment!.paymentId)" >show Payment</button>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <div *ngIf="deleteMsg">
+        <p class="alert alert-success">{{deleteMsg}}</p>
+    </div>
+    <div *ngIf="errorMsg">
+        <p class="alert alert-danger">{{errorMsg}}</p>
+    
+    </div>
+    <div *ngIf="cancelMsg">
+        <p class="alert alert-success">{{cancelMsg}}</p>
+    </div>
+    
+    
+</div>
+</div> 
+

@@ -1,0 +1,34 @@
+.order-card {
+    color: #fff;
+}
+
+.bg-c-blue {
+    background: linear-gradient(#4099ff,#73b4ff);
+}
+
+.bg-c-green {
+    background: linear-gradient(#2ed8b6,#59e0c5);
+}
+
+.bg-c-yellow {
+    background: linear-gradient(#FFB64D,#ffcb80);
+}
+
+.bg-c-pink {
+    background: linear-gradient(#FF5370,#ff869a);
+}
+.card .card-block {
+    padding: 25px;
+}
+
+.order-card i {
+    font-size: 26px;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}

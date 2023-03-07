@@ -1,0 +1,40 @@
+
+.card{
+	width: 340px;
+	border-radius: 35px;
+	background-color: #fff;
+	box-shadow: 0 4px 8px 0;
+
+}
+.total-amount{
+	font-size: 22px;
+	font-weight: 700;
+	color: #383737;
+}
+.amount-container{
+	background-color: #e9eaeb;
+	padding: 6px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 8px;
+}
+.amount-text{
+	font-size: 20px;
+	font-weight: 700;
+	color: #673AB7;
+}
+
+.payment-btn{
+	background-color: blue;
+	padding: 15px;
+	padding-left: 25px;
+	padding-right: 25px;
+	color: #fff;
+	font-weight: 600;
+	border-radius: 12px;
+}
+.payment-btn:hover{
+	box-shadow: none;
+	color: #fff;
+}
+

@@ -1,0 +1,66 @@
+<!-- <div class="container center"> -->
+    <!-- <div class="container center">
+        <div class="card-body">
+        <div class="row justify-content-center">
+               <div class="col-md-7">
+                   <div class="card-group mb-0">
+                       <div class="card p-4"> -->
+                        <div class="container-fluid mx-auto "> 
+                        <h1>Add service</h1>
+                        <form class="form-group" (ngSubmit)="onSubmit()" action="/action_page.php">
+                    
+                            <label for="serviceId">Service Id</label>
+                            <input type="hidden" id="serviceId" name="serviceId" class="form-control" [(ngModel)]="services.serviceId"
+                                #idRef="ngModel" pattern="^\d{1,2}$" [defaultValue]="1" required serviceId>
+                            <!-- <div *ngIf="idRef.invalid && (idRef.dirty || idRef.touched)">
+                    
+                                <div *ngIf="idRef.errors?.['required']" class="alert alert-danger">Id is required.</div>
+                    
+                                <div *ngIf="idRef.errors?.['pattern']" class="alert alert-danger">Id between 1 to 99, only digits allowed
+                                </div>
+                            </div> -->
+                    
+                            <label for="name">Service Name</label>
+                            <input type="text" id="name" name="name" class="form-control" [(ngModel)]="services.seviceName" #nameRef="ngModel"
+                                pattern="[a-zA-Z *]{5,}" required seviceName>
+                            <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
+                                <div *ngIf="nameRef.errors?.['required']" class="alert alert-danger">Name is required.</div>
+                    
+                                <div *ngIf="nameRef.errors?.['pattern']" class="alert alert-danger">Name must be of min 5 chars, Only alphabet and spaces accepted..</div>
+                            </div>
+                    
+                            <label for="servicePrice">Service price</label>
+                            <input type="number" id="servicePrice" name="servicePrice" class="form-control" [(ngModel)]="services.servicePrice"
+                                #priceRef="ngModel" pattern="^\d{2,4}$" required servicePrice>
+                            <div *ngIf="priceRef.invalid && (priceRef.dirty || priceRef.touched)">
+                    
+                                <div *ngIf="priceRef.errors?.['required']" class="alert alert-danger">Price is required.</div>
+                    
+                                <div *ngIf="priceRef.errors?.['pattern']" class="alert alert-danger">Only digits allowed, minimum 2 & maximum 4 digits allowed
+                                </div>
+                            </div>
+                    
+                            <label for="serviceDuration">Service Duration(min)</label>
+                            <input type="number" id="serviceDuration" name="serviceDuration" class="form-control" [(ngModel)]="services.serviceDuration"
+                                #durationRef="ngModel" pattern="^\d{1,2}$" min="10" required serviceDuration>
+                            <div *ngIf="durationRef.invalid && (durationRef.dirty || durationRef.touched)">
+                    
+                                <div *ngIf="durationRef.errors?.['required']" class="alert alert-danger">Duration is required.</div>
+                    
+                                <div *ngIf="durationRef.errors?.['pattern']" class="alert alert-danger">
+                                </div>
+                            </div>
+                    
+                            <input type="submit"  class="btn btn-primary active mt-3" [disabled]="services.seviceName==null||services.servicePrice==null||services.serviceDuration==null">
+                        </form>
+                    
+                        <div *ngIf="msg">
+                            <p class="alert alert-success">{{msg}}</p>
+                           
+                        </div>
+                    
+                        <div *ngIf="errorMsg">
+                            <p class="alert alert-danger">{{errorMsg}}</p>
+                            
+                        </div>
+                    </div>

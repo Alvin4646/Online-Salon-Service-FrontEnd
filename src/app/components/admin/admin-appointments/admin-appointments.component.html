@@ -1,0 +1,66 @@
+<div class = "page-header mx-md-n5 text-center"style="width: 100%; height:100px; margin-top:20px">
+    <h1>
+       All Appointments
+     
+    </h1>
+ </div>
+<div class="container bootstrap snippets bootdey">
+    <div *ngIf="appointment.length == 0">
+        <p class="alert alert-info">You don't have any appointments to display.</p>
+    </div>
+    <div class="table-responsive" *ngIf="appointment.length>0">
+        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+            <div class="input-group">
+              <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" [(ngModel)]="query" class="form-control border-0 bg-light">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+            
+          </div>
+    	<table class="table colored-header datatable project-list">
+    		<thead>
+        <tr>
+            <td>Customer</td>
+            <td>Appointment Id</td>
+            <td>Location</td>
+            <td>preferredDate</td>
+            <td>preferredTime</td>
+            <td>appointmentStatus</td>
+            <td>Services</td>
+           
+        </tr>
+        
+    </thead>
+    <tbody *ngFor="let cust of customer| search:query">
+
+        <tr *ngFor="let app of cust.appointments| search:query">
+            <td>{{cust.name}}</td>
+            <td>{{app.appointmentId}}</td>
+            <td>{{app.location}}</td>
+            <td>{{app.preferredDate}}</td>
+            <td>{{app.preferredTime}}</td>
+            <td>{{app.appointmentStatus}}</td>
+            <td><ul>
+                <li class="list-group-item" *ngFor="let service of app.serviceList">
+                {{service.seviceName}} 
+            </li>
+            </ul></td>
+           
+        </tr>
+    </tbody>
+    </table>
+    <!-- <div *ngIf="errorMsg">
+        <p class="alert alert-danger">{{errorMsg}}</p>
+    
+    </div>
+    <div *ngIf="cancelMsg">
+        <p class="alert alert-success">{{cancelMsg}}</p>
+    </div>
+    <div *ngIf="deleteMsg">
+        <p class="alert alert-success">{{deleteMsg}}</p>
+    </div> -->
+    
+</div>
+</div> 
+

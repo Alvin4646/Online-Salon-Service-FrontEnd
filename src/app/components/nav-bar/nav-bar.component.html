@@ -1,0 +1,121 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" routerLink="home" *ngIf="!security.isAdmin()">
+          <img
+            src="https://thumbs.dreamstime.com/b/simple-scissors-comb-hair-salon-logo-illustration-scissors-comb-hair-salon-logo-illustration-white-background-150563800.jpg"
+            height="35"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a>
+        <a class="navbar-brand mt-2 mt-lg-0" routerLink="/adminHome"*ngIf="security.isAdmin()">
+          <img
+            src="https://thumbs.dreamstime.com/b/simple-scissors-comb-hair-salon-logo-illustration-scissors-comb-hair-salon-logo-illustration-white-background-150563800.jpg"
+            height="35"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!security.isAdmin()">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="appointment">My Appointments</a>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="salonService">Services</a>
+          </li>
+          <li  class="nav-item">
+            <a class="nav-link"routerLink="bookAppointment">Add appointment</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="security.isAdmin()">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="admin/appointments">Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="admin/payments">Payments</a>
+          </li>
+          <li  class="nav-item">
+            <a class="nav-link"routerLink="salonService">Services</a>
+          </li>
+          <li  class="nav-item">
+            <a class="nav-link"routerLink="admin/customers">Customers</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <a class="text-reset me-3" routerLink="cart"  *ngIf="!security.isAdmin()">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-4">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="login" *ngIf="!(security.isLoggedIn |async)">Login</a>
+            </li>
+         </ul>   
+        
+        <!-- Avatar -->
+        <div class="dropdown " *ngIf="security.isLoggedIn |async">
+          <a
+            class="dropdown-toggle d-flex align-items-center"
+            href="#"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-bs-toggle="dropdown"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+              class="rounded-circle"
+              height="25"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+              
+            />
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuAvatar"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="/updateCustomer">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" *ngIf="security.isAdmin()" routerLink="admin/register">Add Admin</a>
+            </li>
+            <li>
+              <a class="dropdown-item btn-danger" id="logout" routerLink="/login" (click)="security.logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->

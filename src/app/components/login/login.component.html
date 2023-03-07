@@ -1,0 +1,237 @@
+<div class="container py-5">
+    <div class="row">
+        <ul role="tablist" class="nav bg-light nav-pills rounded-pill nav-fill mb-3">
+            <li class="nav-item">
+                <a data-toggle="pill" href="#nav-tab-login" class="nav-link active rounded-pill">
+
+                    Login
+                </a>
+            </li>
+            <li class="nav-item">
+                <a data-toggle="pill" href="#nav-tab-register" class="nav-link rounded-pill">
+
+                    Register
+                </a>
+            </li>
+
+        </ul>
+        <div class="tab-content">
+            <div id="nav-tab-login" class="tab-pane fade show active">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card-group mb-0">
+                                <div class="card p-4">
+                                    <div class="card-body">
+                                        <h1>Login</h1>
+                                        <p class="text-muted">Sign In to your account</p>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input type="hidden" name="pk" id="pk" [(ngModel)]="user.userId">
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                [(ngModel)]="user.username" #unameRef="ngModel" required>
+                                        </div>
+                                        <div *ngIf=" (unameRef.dirty || unameRef.touched)">
+
+                                            <div *ngIf="unameRef.errors?.['required']" class="alert alert-danger">User
+                                                name is required.</div>
+
+
+                                        </div>
+                                        <div class="input-group mb-4">
+                                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                            <input type="password" class="form-control" placeholder="Password"
+                                                [(ngModel)]="user.password" #pwdRef="ngModel"
+                                                pattern="[a-zA-Z0-9@#!%^&*]{8,16}" required>
+                                        </div>
+                                        <div *ngIf="pwdRef.invalid && (pwdRef.dirty || pwdRef.touched)">
+                                            <div *ngIf="pwdRef.errors?.['required']" class="alert alert-danger">Password
+                                                is required.</div>
+                                            <div *ngIf="pwdRef.errors?.['pattern']" class="alert alert-danger">Password
+                                                must contain min 8 and max 16
+                                                alphanumeric ,only @#!%^&* allowed .</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-primary px-4"
+                                                    (click)="getAccessToken(user)">Login</button>
+
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <button type="button" class="btn btn-link px-0">Forgot
+                                                    password?</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div *ngIf="msg">
+                                <p class="alert alert-success">{{msg}}</p>
+
+                            </div>
+
+                            <div *ngIf="errorMsg">
+                                <p class="alert alert-danger">{{errorMsg}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="nav-tab-register" class="tab-pane fade">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card-group mb-0">
+                                <div class="card p-4">
+                                    <div class="card-body" [formGroup]="customerRegister"> 
+                                        <h1>Register</h1>
+                                        <p class="text-muted">Create your account</p>
+                                        <!--Username-->
+                                        <div class="input-group mb-3">
+                
+                                            <input type="text" class="form-control" placeholder="Username"
+                                                formControlName="userName"  required>
+                                               
+                                        </div>
+                                        <div *ngIf=" getControl('userName')&& getControl('userName')!.touched||getControl('userName')!.dirty ">
+                
+                                            <div *ngIf="getControl('userName') && getControl('userName')!.invalid" class="alert alert-danger">
+                                                User name is required.</div>
+                                                <div *ngIf="getControl('userName') && getControl('userName')!.hasError('pattern') "class="alert alert-danger">
+                                                    onlyl number.</div>
+                    
+                                                
+                                        </div>
+                                      
+                                        <!--Password-->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="password" class="form-control" placeholder="Password"
+                                                formControlName="password" required>
+                                        </div>
+                                        <div *ngIf=" getControl('password')&& getControl('password')!.touched||getControl('password')!.dirty ">
+                
+                                            <div *ngIf="getControl('password') && getControl('password')!.invalid" class="alert alert-danger">
+                                                password is required.</div>
+                                                <div *ngIf="getControl('password') && getControl('password')!.hasError('pattern') "class="alert alert-danger">
+                                                    Password must contain min 8 and max 16
+                                                alphanumeric ,only @#!%^&* allowed .</div>
+                                        </div>
+                                        <!--Confirm Password-->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="password" class="form-control" placeholder="Confirm Password"
+                                                  formControlName="confirmPassword" required>
+                                        </div>
+                                        <div *ngIf=" getControl('confirmPassword')&& getControl('confirmPassword')!.touched||getControl('confirmPassword')!.dirty ">
+                
+                                            <div *ngIf="getControl('confirmPassword') && getControl('confirmPassword')!.invalid" class="alert alert-danger">
+                                                con password is required.</div>
+                                                <div *ngIf="getControl('confirmPassword') && customerRegister.hasError('notSame')" class="alert alert-danger">
+                                                    Password doesn't match.</div>
+                                                    
+                                        </div>
+                                     
+                                        
+                                        <!-- name -->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="text" id="name" name="name" class="form-control"
+                                                placeholder="Name" 
+                                                formControlName="name"  required>
+                                        </div>
+                                        <div *ngIf=" getControl('name')&& getControl('name')!.touched||getControl('name')!.dirty ">
+                
+                                            <div *ngIf="getControl('name') && getControl('name')!.invalid" class="alert alert-danger">
+                                                Name is required.</div>
+                                                <div *ngIf="getControl('name')!.errors?.['pattern']" class="alert alert-danger">Name
+                                                    must be of min 3 chars, no special
+                                                    chars allowed..</div>
+                                         
+                                        </div>
+                                        <!--Email-->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="email" class="form-control" placeholder="Email"
+                                            formControlName="email"  required>
+                                        </div>
+                                        <div *ngIf=" getControl('email')&& getControl('email')!.touched||getControl('email')!.dirty ">
+                
+                                            <div *ngIf="getControl('email') && getControl('email')!.invalid" class="alert alert-danger">
+                                                email is required.</div>
+                                                <div *ngIf="getControl('email') && getControl('email')!.hasError('email')" class="alert alert-danger">
+                                                    invalid email ID.</div>  
+                                         
+                                        </div>
+                                        <!--Phone-->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="phone" class="form-control" placeholder="Contact Number"
+                                            
+                                             formControlName="contactNo"  required>
+                                        </div>
+                                        <div *ngIf=" getControl('contactNo')&& getControl('contactNo')!.touched||getControl('contactNo')!.dirty ">
+                
+                                            <div *ngIf="getControl('contactNo') && getControl('contactNo')!.invalid" class="alert alert-danger">
+                                                Contact Number is required and should be of length 10.</div>
+                                                
+                                         
+                                        </div>
+                                        <!--Date of Birth-->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="date" class="form-control" placeholder="Date of Birth"
+                                            formControlName="dob"  required>
+                                        </div>
+                                        <div *ngIf=" getControl('dob')&& getControl('dob')!.touched||getControl('dob')!.dirty ">
+                
+                                            <div *ngIf="getControl('dob') && getControl('dob')!.invalid" class="alert alert-danger">
+                                               Date of Birth is required.</div>
+                                                <div *ngIf="getControl('dob') && getControl('dob')!.hasError('futureDate')" class="alert alert-danger">
+                                                    Date can't be from future .</div>
+                                         
+                                        </div>
+                                        <!--Address-->
+                                        <div class="input-group mb-4">
+                
+                                            <input type="text" class="form-control" placeholder="Address"
+                                                
+                                                formControlName="address"   required>
+                                        </div>
+                                        <div *ngIf=" getControl('address')&& getControl('address')!.touched||getControl('address')!.dirty ">
+                
+                                            <div *ngIf="getControl('address') && getControl('address')!.invalid" class="alert alert-danger">
+                                               Address is required.</div>
+                                               <div *ngIf="getControl('address')!.errors?.['pattern']" class="alert alert-danger">Address
+                                                must be min 5 char and only numbers and characters allowed</div>
+                                        </div>
+                                        <div class="row">
+                
+                                            <button type="button" class="btn btn-primary px-4" (click)=" registerCustomer()"[disabled]="customerRegister.invalid">Register</button>
+                
+                
+                
+                                        </div>
+                                    </div>
+                                </div>
+                
+                            </div>
+                            <div *ngIf="msg">
+                                <p class="alert alert-success">{{msg}}</p>
+                
+                            </div>
+                
+                            <div *ngIf="errorMsg">
+                                <p class="alert alert-danger">{{errorMsg}}</p>
+                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
